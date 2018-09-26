@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, Data.DB, Datasnap.DBClient,
-  Datasnap.DSConnect, UDMConexao;
+  Datasnap.DSConnect, UDMConexao, ClassPaiCadastro;
 
 type
   TDMPai = class(TDataModule)
@@ -13,8 +13,12 @@ type
     procedure CDS_CadastroAfterDelete(DataSet: TDataSet);
   private
     { Private declarations }
+    FCodigoAtual: Integer;
+    FClasseFilha: TFClassPaiCadastro;
   public
     { Public declarations }
+    property CodigoAtual: Integer read FCodigoAtual write FCodigoAtual;
+    property ClasseFilha: TFClassPaiCadastro read FClasseFilha write FClasseFilha;
   end;
 
 var

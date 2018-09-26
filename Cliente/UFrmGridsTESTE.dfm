@@ -6,7 +6,18 @@ inherited FrmGridsTESTE: TFrmGridsTESTE
   ExplicitHeight = 701
   PixelsPerInch = 96
   TextHeight = 13
-  object DBGrid1: TDBGrid
+  inherited pnlTop: TPanel
+    Width = 988
+    TabOrder = 6
+    inherited pnlNavegacao: TPanel
+      Left = 788
+    end
+  end
+  inherited Panel1: TPanel
+    Height = 612
+    TabOrder = 7
+  end
+  object DBGrid1: TDBGrid [2]
     Left = 120
     Top = 24
     Width = 649
@@ -19,7 +30,7 @@ inherited FrmGridsTESTE: TFrmGridsTESTE
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
-  object DBGrid2: TDBGrid
+  object DBGrid2: TDBGrid [3]
     Left = 120
     Top = 239
     Width = 649
@@ -32,7 +43,7 @@ inherited FrmGridsTESTE: TFrmGridsTESTE
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
-  object DBGrid3: TDBGrid
+  object DBGrid3: TDBGrid [4]
     Left = 120
     Top = 408
     Width = 649
@@ -45,7 +56,7 @@ inherited FrmGridsTESTE: TFrmGridsTESTE
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
-  object DBNavigator1: TDBNavigator
+  object DBNavigator1: TDBNavigator [5]
     Left = 144
     Top = 574
     Width = 600
@@ -53,7 +64,7 @@ inherited FrmGridsTESTE: TFrmGridsTESTE
     DataSource = DataSource1
     TabOrder = 3
   end
-  object Edit1: TEdit
+  object Edit1: TEdit [6]
     Left = 782
     Top = 585
     Width = 65
@@ -66,7 +77,7 @@ inherited FrmGridsTESTE: TFrmGridsTESTE
     ParentFont = False
     TabOrder = 4
   end
-  object Button1: TButton
+  object Button1: TButton [7]
     Left = 853
     Top = 585
     Width = 108

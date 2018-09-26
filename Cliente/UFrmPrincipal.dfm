@@ -23,6 +23,10 @@ object FrmPrincipal: TFrmPrincipal
         Caption = 'Contato'
         OnClick = mmContatoClick
       end
+      object mmGridTESTE: TMenuItem
+        Caption = 'GridTESTE'
+        OnClick = mmGridTESTEClick
+      end
       object mmSair: TMenuItem
         Caption = 'Sair'
       end

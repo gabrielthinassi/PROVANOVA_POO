@@ -9,7 +9,10 @@ uses
   UFrmPaiCadastro in 'UFrmPaiCadastro.pas' {FrmPaiCadastro},
   UDMPai in 'UDMPai.pas' {DMPai: TDataModule},
   UDMCadContato in 'UDMCadContato.pas' {DMCadContato: TDataModule},
-  UFrmGridsTESTE in 'UFrmGridsTESTE.pas' {FrmGridsTESTE};
+  UFrmGridsTESTE in 'UFrmGridsTESTE.pas' {FrmGridsTESTE},
+  ClassPaiCadastro in '..\Classes\ClassPaiCadastro.pas',
+  ClassContato in '..\Classes\ClassContato.pas',
+  UFrmCadContato in 'UFrmCadContato.pas' {FrmCadContato};
 
 {$R *.res}
 

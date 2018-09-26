@@ -13,6 +13,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
     Height = 50
     Align = alTop
     TabOrder = 0
+    OnExit = pnlTopExit
     object edtCodigo: TJvCalcEdit
       Left = 16
       Top = 15
@@ -37,7 +38,6 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
         Align = alLeft
         Caption = '|<'
         TabOrder = 0
-        ExplicitLeft = -5
       end
       object btnUltimo: TBitBtn
         Left = 145
@@ -47,8 +47,6 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
         Align = alLeft
         Caption = '>|'
         TabOrder = 1
-        ExplicitLeft = 9
-        ExplicitTop = 2
       end
       object btnProximo: TBitBtn
         Left = 97
@@ -58,8 +56,6 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
         Align = alLeft
         Caption = '>'
         TabOrder = 2
-        ExplicitLeft = 9
-        ExplicitTop = 2
       end
       object btnAnterior: TBitBtn
         Left = 49
@@ -69,9 +65,16 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
         Align = alLeft
         Caption = '<'
         TabOrder = 3
-        ExplicitLeft = 9
-        ExplicitTop = 2
       end
+    end
+    object BitBtn1: TBitBtn
+      Left = 264
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'BitBtn1'
+      TabOrder = 2
+      OnClick = BitBtn1Click
     end
   end
   object Panel1: TPanel
@@ -98,6 +101,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
       Align = alTop
       Caption = '&Gravar'
       TabOrder = 1
+      OnClick = btnGravarClick
     end
     object btnCancelar: TBitBtn
       Left = 1
@@ -107,6 +111,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
       Align = alTop
       Caption = '&Cancelar'
       TabOrder = 2
+      OnClick = btnCancelarClick
     end
     object btnExcluir: TBitBtn
       Left = 1
@@ -116,6 +121,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
       Align = alTop
       Caption = '&Excluir'
       TabOrder = 3
+      OnClick = btnExcluirClick
     end
     object btnIncluir: TBitBtn
       Left = 1
@@ -125,6 +131,12 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
       Align = alTop
       Caption = '&Incluir'
       TabOrder = 4
+      OnClick = btnIncluirClick
     end
+  end
+  object DS: TDataSource
+    OnStateChange = DSStateChange
+    Left = 72
+    Top = 328
   end
 end
