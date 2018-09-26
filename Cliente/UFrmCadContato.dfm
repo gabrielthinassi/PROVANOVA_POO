@@ -20,6 +20,11 @@ inherited FrmCadContato: TFrmCadContato
     Caption = 'DTNASCIMENTO_CONTATO'
     FocusControl = DBEdit2
   end
+  inherited pnlTop: TPanel
+    inherited edtCodigo: TJvCalcEdit
+      OnExit = edtCodigoExit
+    end
+  end
   object DBEdit1: TDBEdit [4]
     Left = 168
     Top = 80

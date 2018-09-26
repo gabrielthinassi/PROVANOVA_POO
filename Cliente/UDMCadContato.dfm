@@ -6,7 +6,6 @@ inherited DMCadContato: TDMCadContato
     ServerClassName = 'TSMCadContato'
   end
   inherited CDS_Cadastro: TClientDataSet
-    Active = True
     ProviderName = 'DSP_Cadastro'
     object CDS_CadastroCODIGO_CONTATO: TIntegerField
       DisplayLabel = 'Codigo'
@@ -34,7 +33,6 @@ inherited DMCadContato: TDMCadContato
     end
   end
   object CDS_Endereco: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = CDS_CadastroSQL_Endereco
     Params = <>
@@ -61,7 +59,6 @@ inherited DMCadContato: TDMCadContato
     end
   end
   object CDS_Telefone: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = CDS_CadastroSQL_Telefone
     Params = <>

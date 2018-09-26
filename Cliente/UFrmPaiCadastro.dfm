@@ -74,7 +74,6 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
       Height = 25
       Caption = 'BitBtn1'
       TabOrder = 2
-      OnClick = BitBtn1Click
     end
   end
   object Panel1: TPanel
@@ -135,6 +134,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
     end
   end
   object DS: TDataSource
+    DataSet = DMPai.CDS_Cadastro
     OnStateChange = DSStateChange
     Left = 72
     Top = 328

@@ -3,9 +3,11 @@ unit UFrmCadContato;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UFrmPaiCadastro, Data.DB, Vcl.StdCtrls,
-  Vcl.Buttons, Vcl.Mask, JvExMask, JvToolEdit, JvBaseEdits, Vcl.ExtCtrls, UDMCadContato,
+  Vcl.Buttons, Vcl.Mask, JvExMask, JvToolEdit, JvBaseEdits, Vcl.ExtCtrls,
+  UDMCadContato,
   Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls;
 
 type
@@ -24,6 +26,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
+    procedure edtCodigoExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,17 +43,23 @@ implementation
 procedure TFrmCadContato.BitBtn1Click(Sender: TObject);
 begin
   inherited;
-  DMCadastro.CDS_Cadastro.Close;
-  DMCadastro.CDS_Cadastro.FetchParams;
-  DMCadastro.CDS_Cadastro.Params[0].AsInteger := StrToInt(edtCodigo.Text);
-  DMCadastro.CDS_Cadastro.Open;
+  // DMCadContato.CDS_Cadastro.Close;
+  // DMCadContato.CDS_Cadastro.FetchParams;
+  // DMCadContato.CDS_Cadastro.Params[0].AsInteger := StrToInt(edtCodigo.Text);
+  // DMCadContato.CDS_Cadastro.Open;
+end;
+
+procedure TFrmCadContato.edtCodigoExit(Sender: TObject);
+begin
+  inherited;
+  AbrirCDS(edtCodigo.AsInteger);
 end;
 
 procedure TFrmCadContato.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
-  //if Assigned(FrmCadContato) then
-  //  FreeAndNil(FrmCadContato);
+  // if Assigned(FrmCadContato) then
+  // FreeAndNil(FrmCadContato);
 end;
 
 procedure TFrmCadContato.FormCreate(Sender: TObject);

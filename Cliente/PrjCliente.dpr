@@ -20,8 +20,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDMConexao, DMConexao);
-  Application.CreateForm(TDMPai, DMPai);
-  Application.CreateForm(TDMCadContato, DMCadContato);
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   Application.Run;
 end.

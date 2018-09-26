@@ -17,7 +17,6 @@ object DMConexao: TDMConexao
         'DriverAssemblyLoader=Borland.Data.TDBXClientDriverLoader,Borland' +
         '.Data.DbxClientDriver,Version=24.0.0.0,Culture=neutral,PublicKey' +
         'Token=91d62ebb5b0d1b1b')
-    Connected = True
     Left = 43
     Top = 31
     UniqueId = '{838CBC84-40D0-4927-8712-DAA24CC53E11}'

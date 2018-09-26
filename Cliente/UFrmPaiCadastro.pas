@@ -30,7 +30,6 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
     FDMCadastro: TDMPai;
@@ -53,7 +52,7 @@ implementation
 
 procedure TFrmPaiCadastro.AbrirCDS(Codigo: Integer);
 begin
-  if ((Codigo = 0) or (Codigo = DMPai.CodigoAtual)) then
+  if ((Codigo = 0) or (Codigo = DMCadastro.CodigoAtual)) then
     Exit;
 
   DMCadastro.CDS_Cadastro.Close;
@@ -61,12 +60,6 @@ begin
   DMCadastro.CDS_Cadastro.Params[0].AsInteger := Codigo;
   DMCadastro.CDS_Cadastro.Open;
 
-end;
-
-procedure TFrmPaiCadastro.BitBtn1Click(Sender: TObject);
-begin
-  inherited;
-  AbrirCDS(StrToInt(edtCodigo.Text));
 end;
 
 procedure TFrmPaiCadastro.btnCancelarClick(Sender: TObject);

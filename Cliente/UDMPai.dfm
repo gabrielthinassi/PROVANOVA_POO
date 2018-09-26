@@ -3,7 +3,6 @@ object DMPai: TDMPai
   Height = 324
   Width = 499
   object DSPC_Cadastro: TDSProviderConnection
-    Connected = True
     SQLConnection = DMConexao.CON_DS
     Left = 72
     Top = 48
