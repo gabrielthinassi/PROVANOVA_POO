@@ -19,6 +19,8 @@ type
     destructor Destroy; override;
     property InstanceOwner: Boolean read FInstanceOwner write FInstanceOwner;
     property SMConexaoClient: TSMConexaoClient read GetSMConexaoClient write FSMConexaoClient;
+    function ProximoCodigo(Tabela: String): Integer;
+    function ExecuteReader(SQL: String): OleVariant;
 
 end;
 
@@ -43,6 +45,11 @@ begin
   inherited;
 end;
 
+function TDMConexao.ExecuteReader(SQL: String): OleVariant;
+begin
+  Result := GetSMConexaoClient.ExecuteReader(SQL);
+end;
+
 function TDMConexao.GetSMConexaoClient: TSMConexaoClient;
 begin
   if FSMConexaoClient = nil then
@@ -51,6 +58,11 @@ begin
     FSMConexaoClient:= TSMConexaoClient.Create(CON_DS.DBXConnection, FInstanceOwner);
   end;
   Result := FSMConexaoClient;
+end;
+
+function TDMConexao.ProximoCodigo(Tabela: String): Integer;
+begin
+  Result := GetSMConexaoClient.ProximoCodigo(Tabela);
 end;
 
 end.

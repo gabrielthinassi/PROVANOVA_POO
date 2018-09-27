@@ -21,6 +21,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
       Height = 21
       ImageKind = ikEllipsis
       TabOrder = 0
+      ZeroEmpty = False
       DecimalPlacesAlwaysShown = False
     end
     object pnlNavegacao: TPanel
@@ -38,6 +39,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
         Align = alLeft
         Caption = '|<'
         TabOrder = 0
+        OnClick = btnPrimeiroClick
       end
       object btnUltimo: TBitBtn
         Left = 145
@@ -47,6 +49,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
         Align = alLeft
         Caption = '>|'
         TabOrder = 1
+        OnClick = btnUltimoClick
       end
       object btnProximo: TBitBtn
         Left = 97
@@ -56,6 +59,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
         Align = alLeft
         Caption = '>'
         TabOrder = 2
+        OnClick = btnProximoClick
       end
       object btnAnterior: TBitBtn
         Left = 49
@@ -65,15 +69,8 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
         Align = alLeft
         Caption = '<'
         TabOrder = 3
+        OnClick = btnAnteriorClick
       end
-    end
-    object BitBtn1: TBitBtn
-      Left = 264
-      Top = 16
-      Width = 75
-      Height = 25
-      Caption = 'BitBtn1'
-      TabOrder = 2
     end
   end
   object Panel1: TPanel
@@ -136,6 +133,7 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
   object DS: TDataSource
     DataSet = DMPai.CDS_Cadastro
     OnStateChange = DSStateChange
+    OnDataChange = DSDataChange
     Left = 72
     Top = 328
   end

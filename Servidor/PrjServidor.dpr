@@ -19,8 +19,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFrmServidor, FrmServidor);
   Application.CreateForm(TSC, SC);
-  Application.CreateForm(TSMPai, SMPai);
-  Application.CreateForm(TSMCadContato, SMCadContato);
   Application.Run;
 end.
 

@@ -21,12 +21,16 @@ type
     CDS_EnderecoNUMERO_ENDERECO: TStringField;
     CDS_TelefoneCODIGO_TELEFONE: TIntegerField;
     CDS_TelefoneNUMERO_TELEFONE: TStringField;
+    CDS_EnderecoCONTATO_CODCONTATO: TIntegerField;
+    CDS_TelefoneCONTATO_CODCONTATO: TIntegerField;
     procedure CDS_EnderecoBeforeDelete(DataSet: TDataSet);
     procedure CDS_TelefoneBeforeDelete(DataSet: TDataSet);
     procedure CDS_EnderecoNewRecord(DataSet: TDataSet);
     procedure CDS_TelefoneNewRecord(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure CDS_EnderecoBeforePost(DataSet: TDataSet);
+    procedure CDS_TelefoneBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -49,6 +53,13 @@ begin
     CDS_Cadastro.Edit;
 end;
 
+procedure TDMCadContato.CDS_EnderecoBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+  if CDS_Endereco.State = dsInsert then
+    CDS_Endereco.FieldByName('CODIGO_ENDERECO').AsInteger := DMConexao.ProximoCodigo('CONTATO_ENDERECO');
+end;
+
 procedure TDMCadContato.CDS_EnderecoNewRecord(DataSet: TDataSet);
 begin
   inherited;
@@ -62,6 +73,13 @@ begin
     CDS_Cadastro.Edit;
 end;
 
+procedure TDMCadContato.CDS_TelefoneBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+  if CDS_Telefone.State = dsInsert then
+    CDS_Telefone.FieldByName('CODIGO_TELEFONE').AsInteger := DMConexao.ProximoCodigo('CONTATO_TELEFONE');
+end;
+
 procedure TDMCadContato.CDS_TelefoneNewRecord(DataSet: TDataSet);
 begin
   inherited;
@@ -70,8 +88,8 @@ end;
 
 procedure TDMCadContato.DataModuleCreate(Sender: TObject);
 begin
-  inherited;
   ClasseFilha := TClassContato;
+  inherited;
 end;
 
 procedure TDMCadContato.DataModuleDestroy(Sender: TObject);

@@ -12,7 +12,9 @@ uses
   UFrmGridsTESTE in 'UFrmGridsTESTE.pas' {FrmGridsTESTE},
   ClassPaiCadastro in '..\Classes\ClassPaiCadastro.pas',
   ClassContato in '..\Classes\ClassContato.pas',
-  UFrmCadContato in 'UFrmCadContato.pas' {FrmCadContato};
+  UFrmCadContato in 'UFrmCadContato.pas' {FrmCadContato},
+  UFrmPaiConsulta in 'UFrmPaiConsulta.pas' {FrmPaiConsulta},
+  UFrmConsultaContato in 'UFrmConsultaContato.pas' {FrmConsultaContato};
 
 {$R *.res}
 

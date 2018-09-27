@@ -12,7 +12,6 @@ type
     SQL_Telefone: TSQLDataSet;
     DSEndereco: TDataSource;
     DSTelefone: TDataSource;
-    procedure DSServerModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,11 +26,5 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
-
-procedure TSMCadContato.DSServerModuleCreate(Sender: TObject);
-begin
-  SMConexao := TSMConexao.Create(Self);
-  inherited;
-end;
 
 end.

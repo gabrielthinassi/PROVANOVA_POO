@@ -10,7 +10,9 @@ type
   TDMPai = class(TDataModule)
     DSPC_Cadastro: TDSProviderConnection;
     CDS_Cadastro: TClientDataSet;
+    CDS_Consulta: TClientDataSet;
     procedure CDS_CadastroAfterDelete(DataSet: TDataSet);
+    procedure CDS_CadastroBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
     FCodigoAtual: Integer;
@@ -33,6 +35,12 @@ implementation
 procedure TDMPai.CDS_CadastroAfterDelete(DataSet: TDataSet);
 begin
   CDS_Cadastro.ApplyUpdates(0);
+end;
+
+procedure TDMPai.CDS_CadastroBeforePost(DataSet: TDataSet);
+begin
+  if CDS_Cadastro.State = dsInsert then
+    CDS_Cadastro.FieldByName(ClasseFilha.CampoChave).AsInteger := DMConexao.ProximoCodigo(ClasseFilha.TabelaPrincipal);
 end;
 
 end.

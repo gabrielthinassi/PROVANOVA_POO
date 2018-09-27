@@ -13,6 +13,7 @@ type
     DSP_Cadastro: TDataSetProvider;
     SQL_Consulta: TSQLDataSet;
     DSP_Consulta: TDataSetProvider;
+    procedure DSServerModuleCreate(Sender: TObject);
   private
     { Private declarations }
     FSMConexao: TSMConexao;
@@ -29,5 +30,10 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TSMPai.DSServerModuleCreate(Sender: TObject);
+begin
+  SMConexao := TSMConexao.Create(Self);
+end;
 
 end.

@@ -1,7 +1,7 @@
 inherited FrmCadContato: TFrmCadContato
   Caption = 'Cadastro de Contato'
-  OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]
@@ -22,7 +22,15 @@ inherited FrmCadContato: TFrmCadContato
   end
   inherited pnlTop: TPanel
     inherited edtCodigo: TJvCalcEdit
-      OnExit = edtCodigoExit
+      OnButtonClick = edtCodigoButtonClick
+      OnKeyPress = edtCodigoKeyPress
+    end
+  end
+  inherited Panel1: TPanel
+    inherited btnConsulta: TBitBtn
+      OnClick = btnConsultaClick
+      ExplicitLeft = 2
+      ExplicitTop = 207
     end
   end
   object DBEdit1: TDBEdit [4]
@@ -89,7 +97,6 @@ inherited FrmCadContato: TFrmCadContato
     end
   end
   inherited DS: TDataSource
-    DataSet = DMCadContato.CDS_Cadastro
     Left = 8
     Top = 304
   end

@@ -1,6 +1,5 @@
 inherited SMCadContato: TSMCadContato
   OldCreateOrder = True
-  OnCreate = DSServerModuleCreate
   Width = 646
   inherited SQL_Cadastro: TSQLDataSet
     CommandText = 
@@ -25,9 +24,9 @@ inherited SMCadContato: TSMCadContato
   object SQL_Endereco: TSQLDataSet
     CommandText = 
       'select'#13#10'    CONTATO_ENDERECO.CODIGO_ENDERECO,'#13#10'    CONTATO_ENDER' +
-      'ECO.RUA_ENDERECO,'#13#10'    CONTATO_ENDERECO.NUMERO_ENDERECO'#13#10'from CO' +
-      'NTATO_ENDERECO'#13#10'where CONTATO_ENDERECO.CONTATO_CODCONTATO = :COD' +
-      'IGO_CONTATO'
+      'ECO.RUA_ENDERECO,'#13#10'    CONTATO_ENDERECO.NUMERO_ENDERECO,'#13#10'    CO' +
+      'NTATO_ENDERECO.CONTATO_CODCONTATO'#13#10'from CONTATO_ENDERECO'#13#10'where ' +
+      'CONTATO_ENDERECO.CONTATO_CODCONTATO = :CODIGO_CONTATO'
     DataSource = DSEndereco
     MaxBlobSize = -1
     Params = <
@@ -43,8 +42,9 @@ inherited SMCadContato: TSMCadContato
   object SQL_Telefone: TSQLDataSet
     CommandText = 
       'select'#13#10'    CONTATO_TELEFONE.CODIGO_TELEFONE,'#13#10'    CONTATO_TELEF' +
-      'ONE.NUMERO_TELEFONE'#13#10'from CONTATO_TELEFONE'#13#10'where CONTATO_TELEFO' +
-      'NE.CONTATO_CODCONTATO = :CODIGO_CONTATO'
+      'ONE.NUMERO_TELEFONE,'#13#10'    CONTATO_TELEFONE.CONTATO_CODCONTATO'#13#10'f' +
+      'rom CONTATO_TELEFONE'#13#10'where CONTATO_TELEFONE.CONTATO_CODCONTATO ' +
+      '= :CODIGO_CONTATO'
     DataSource = DSTelefone
     MaxBlobSize = -1
     Params = <

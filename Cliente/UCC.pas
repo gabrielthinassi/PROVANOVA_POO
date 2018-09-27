@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 24/09/2018 20:50:21
+// 26/09/2018 22:55:22
 //
 
 unit UCC;
@@ -12,10 +12,14 @@ uses System.JSON, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON
 type
   TSMConexaoClient = class(TDSAdminClient)
   private
+    FProximoCodigoCommand: TDBXCommand;
+    FExecuteReaderCommand: TDBXCommand;
   public
     constructor Create(ADBXConnection: TDBXConnection); overload;
     constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
+    function ProximoCodigo(Tabela: string): Integer;
+    function ExecuteReader(SQL: string): OleVariant;
   end;
 
   TSMCadContatoClient = class(TDSAdminClient)
@@ -24,11 +28,39 @@ type
   public
     constructor Create(ADBXConnection: TDBXConnection); overload;
     constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
-    procedure DSServerModuleCreate(Sender: TObject);
     destructor Destroy; override;
+    procedure DSServerModuleCreate(Sender: TObject);
   end;
 
 implementation
+
+function TSMConexaoClient.ProximoCodigo(Tabela: string): Integer;
+begin
+  if FProximoCodigoCommand = nil then
+  begin
+    FProximoCodigoCommand := FDBXConnection.CreateCommand;
+    FProximoCodigoCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FProximoCodigoCommand.Text := 'TSMConexao.ProximoCodigo';
+    FProximoCodigoCommand.Prepare;
+  end;
+  FProximoCodigoCommand.Parameters[0].Value.SetWideString(Tabela);
+  FProximoCodigoCommand.ExecuteUpdate;
+  Result := FProximoCodigoCommand.Parameters[1].Value.GetInt32;
+end;
+
+function TSMConexaoClient.ExecuteReader(SQL: string): OleVariant;
+begin
+  if FExecuteReaderCommand = nil then
+  begin
+    FExecuteReaderCommand := FDBXConnection.CreateCommand;
+    FExecuteReaderCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FExecuteReaderCommand.Text := 'TSMConexao.ExecuteReader';
+    FExecuteReaderCommand.Prepare;
+  end;
+  FExecuteReaderCommand.Parameters[0].Value.SetWideString(SQL);
+  FExecuteReaderCommand.ExecuteUpdate;
+  Result := FExecuteReaderCommand.Parameters[1].Value.AsVariant;
+end;
 
 
 constructor TSMConexaoClient.Create(ADBXConnection: TDBXConnection);
@@ -45,19 +77,9 @@ end;
 
 destructor TSMConexaoClient.Destroy;
 begin
+  FProximoCodigoCommand.DisposeOf;
+  FExecuteReaderCommand.DisposeOf;
   inherited;
-end;
-
-
-constructor TSMCadContatoClient.Create(ADBXConnection: TDBXConnection);
-begin
-  inherited Create(ADBXConnection);
-end;
-
-
-constructor TSMCadContatoClient.Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean);
-begin
-  inherited Create(ADBXConnection, AInstanceOwner);
 end;
 
 procedure TSMCadContatoClient.DSServerModuleCreate(Sender: TObject);
@@ -86,8 +108,21 @@ begin
 end;
 
 
+constructor TSMCadContatoClient.Create(ADBXConnection: TDBXConnection);
+begin
+  inherited Create(ADBXConnection);
+end;
+
+
+constructor TSMCadContatoClient.Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ADBXConnection, AInstanceOwner);
+end;
+
+
 destructor TSMCadContatoClient.Destroy;
 begin
+  FDSServerModuleCreateCommand.DisposeOf;
   inherited;
 end;
 

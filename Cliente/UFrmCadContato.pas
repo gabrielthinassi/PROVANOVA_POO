@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UFrmPaiCadastro, Data.DB, Vcl.StdCtrls,
   Vcl.Buttons, Vcl.Mask, JvExMask, JvToolEdit, JvBaseEdits, Vcl.ExtCtrls,
   UDMCadContato,
-  Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls;
+  Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, UFrmConsultaContato;
 
 type
   TFrmCadContato = class(TFrmPaiCadastro)
@@ -24,9 +24,10 @@ type
     gridEndereco: TDBGrid;
     gridTelefone: TDBGrid;
     procedure FormCreate(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure BitBtn1Click(Sender: TObject);
-    procedure edtCodigoExit(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnConsultaClick(Sender: TObject);
+    procedure edtCodigoButtonClick(Sender: TObject);
+    procedure edtCodigoKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -40,26 +41,32 @@ implementation
 
 {$R *.dfm}
 
-procedure TFrmCadContato.BitBtn1Click(Sender: TObject);
+procedure TFrmCadContato.btnConsultaClick(Sender: TObject);
 begin
   inherited;
-  // DMCadContato.CDS_Cadastro.Close;
-  // DMCadContato.CDS_Cadastro.FetchParams;
-  // DMCadContato.CDS_Cadastro.Params[0].AsInteger := StrToInt(edtCodigo.Text);
-  // DMCadContato.CDS_Cadastro.Open;
+  Application.CreateForm(TFrmConsultaContato, FrmConsultaContato);
+  FrmConsultaContato.ShowModal;
+
+  if FrmConsultaContato.Codigo > 0 then
+  begin
+    edtCodigo.Text := IntToStr(FrmConsultaContato.Codigo);
+    AbrirCDS(FrmConsultaContato.Codigo);
+    btnIncluir.SetFocus;
+  end;
+  FreeAndNil(FrmConsultaContato);
 end;
 
-procedure TFrmCadContato.edtCodigoExit(Sender: TObject);
+procedure TFrmCadContato.edtCodigoButtonClick(Sender: TObject);
 begin
   inherited;
-  AbrirCDS(edtCodigo.AsInteger);
+  btnConsulta.Click;
 end;
 
-procedure TFrmCadContato.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFrmCadContato.edtCodigoKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  // if Assigned(FrmCadContato) then
-  // FreeAndNil(FrmCadContato);
+  if Key = #13 then
+    btnIncluir.SetFocus;
 end;
 
 procedure TFrmCadContato.FormCreate(Sender: TObject);
@@ -67,6 +74,13 @@ begin
   inherited;
   DMCadastro := TDMCadContato.Create(Self);
   DMCadastro.CodigoAtual := 0;
+end;
+
+procedure TFrmCadContato.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  //if Assigned(FrmCadContato) then
+  //  FreeAndNil(FrmCadContato);
 end;
 
 end.

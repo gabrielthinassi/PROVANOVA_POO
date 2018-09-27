@@ -6,11 +6,12 @@ inherited DMCadContato: TDMCadContato
     ServerClassName = 'TSMCadContato'
   end
   inherited CDS_Cadastro: TClientDataSet
+    Active = True
     ProviderName = 'DSP_Cadastro'
     object CDS_CadastroCODIGO_CONTATO: TIntegerField
       DisplayLabel = 'Codigo'
       FieldName = 'CODIGO_CONTATO'
-      Required = True
+      ProviderFlags = [pfInKey]
     end
     object CDS_CadastroNOME_CONTATO: TStringField
       DisplayLabel = 'Nome'
@@ -21,7 +22,7 @@ inherited DMCadContato: TDMCadContato
     object CDS_CadastroDTNASCIMENTO_CONTATO: TDateField
       DisplayLabel = 'Nascimento'
       FieldName = 'DTNASCIMENTO_CONTATO'
-      EditMask = '!99/99/00;0;_'
+      EditMask = '!99/99/9999;1;_'
     end
     object CDS_CadastroSQL_Telefone: TDataSetField
       FieldName = 'SQL_Telefone'
@@ -32,10 +33,12 @@ inherited DMCadContato: TDMCadContato
       Visible = False
     end
   end
-  object CDS_Endereco: TClientDataSet
+  object CDS_Endereco: TClientDataSet [2]
+    Active = True
     Aggregates = <>
     DataSetField = CDS_CadastroSQL_Endereco
     Params = <>
+    BeforePost = CDS_EnderecoBeforePost
     BeforeDelete = CDS_EnderecoBeforeDelete
     AfterDelete = CDS_CadastroAfterDelete
     OnNewRecord = CDS_EnderecoNewRecord
@@ -44,7 +47,6 @@ inherited DMCadContato: TDMCadContato
     object CDS_EnderecoCODIGO_ENDERECO: TIntegerField
       DisplayLabel = 'Codigo'
       FieldName = 'CODIGO_ENDERECO'
-      Required = True
     end
     object CDS_EnderecoRUA_ENDERECO: TStringField
       DisplayLabel = 'Rua'
@@ -57,11 +59,17 @@ inherited DMCadContato: TDMCadContato
       FieldName = 'NUMERO_ENDERECO'
       Size = 5
     end
+    object CDS_EnderecoCONTATO_CODCONTATO: TIntegerField
+      FieldName = 'CONTATO_CODCONTATO'
+      Required = True
+    end
   end
-  object CDS_Telefone: TClientDataSet
+  object CDS_Telefone: TClientDataSet [3]
+    Active = True
     Aggregates = <>
     DataSetField = CDS_CadastroSQL_Telefone
     Params = <>
+    BeforePost = CDS_TelefoneBeforePost
     BeforeDelete = CDS_TelefoneBeforeDelete
     AfterDelete = CDS_CadastroAfterDelete
     OnNewRecord = CDS_TelefoneNewRecord
@@ -70,7 +78,6 @@ inherited DMCadContato: TDMCadContato
     object CDS_TelefoneCODIGO_TELEFONE: TIntegerField
       DisplayLabel = 'Codigo'
       FieldName = 'CODIGO_TELEFONE'
-      Required = True
     end
     object CDS_TelefoneNUMERO_TELEFONE: TStringField
       DisplayLabel = 'Telefone'
@@ -79,5 +86,13 @@ inherited DMCadContato: TDMCadContato
       EditMask = '!\(99\)00000-0000;0;_'
       Size = 11
     end
+    object CDS_TelefoneCONTATO_CODCONTATO: TIntegerField
+      FieldName = 'CONTATO_CODCONTATO'
+      Required = True
+    end
+  end
+  inherited CDS_Consulta: TClientDataSet
+    ProviderName = 'DSP_Consulta'
+    Top = 192
   end
 end

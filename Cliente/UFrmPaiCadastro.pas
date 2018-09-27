@@ -23,13 +23,17 @@ type
     btnProximo: TBitBtn;
     btnAnterior: TBitBtn;
     DS: TDataSource;
-    BitBtn1: TBitBtn;
     procedure pnlTopExit(Sender: TObject);
     procedure DSStateChange(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
+    procedure DSDataChange(Sender: TObject; Field: TField);
+    procedure btnPrimeiroClick(Sender: TObject);
+    procedure btnAnteriorClick(Sender: TObject);
+    procedure btnProximoClick(Sender: TObject);
+    procedure btnUltimoClick(Sender: TObject);
   private
     { Private declarations }
     FDMCadastro: TDMPai;
@@ -46,6 +50,9 @@ var
 
 implementation
 
+uses
+  Datasnap.DBClient, UDMConexao;
+
 {$R *.dfm}
 
 { TFrmPaiCadastro }
@@ -60,6 +67,12 @@ begin
   DMCadastro.CDS_Cadastro.Params[0].AsInteger := Codigo;
   DMCadastro.CDS_Cadastro.Open;
 
+end;
+
+procedure TFrmPaiCadastro.btnAnteriorClick(Sender: TObject);
+begin
+  inherited;
+  NavegarRegistro(1);
 end;
 
 procedure TFrmPaiCadastro.btnCancelarClick(Sender: TObject);
@@ -101,6 +114,34 @@ begin
   end;
 end;
 
+procedure TFrmPaiCadastro.btnPrimeiroClick(Sender: TObject);
+begin
+  inherited;
+  NavegarRegistro(0);
+end;
+
+procedure TFrmPaiCadastro.btnProximoClick(Sender: TObject);
+begin
+  inherited;
+  NavegarRegistro(2);
+end;
+
+procedure TFrmPaiCadastro.btnUltimoClick(Sender: TObject);
+begin
+  inherited;
+  NavegarRegistro(3);
+end;
+
+procedure TFrmPaiCadastro.DSDataChange(Sender: TObject; Field: TField);
+begin
+  inherited;
+  if Assigned(DMCadastro) then
+  begin
+    edtCodigo.Text := DMCadastro.CDS_Cadastro.FieldByName(DMCadastro.ClasseFilha.CampoChave).AsString;
+    DMCadastro.CodigoAtual := DMCadastro.CDS_Cadastro.FieldByName(DMCadastro.ClasseFilha.CampoChave).AsInteger;
+  end;
+end;
+
 procedure TFrmPaiCadastro.DSStateChange(Sender: TObject);
 begin
   inherited;
@@ -115,19 +156,39 @@ begin
 end;
 
 procedure TFrmPaiCadastro.NavegarRegistro(Sentido: Integer);
+var
+  SQL: String;
+  CDSTemp: TClientDataSet;
 begin
-  case Sentido of
-  0: DMCadastro.CDS_Cadastro.First;
-  1: DMCadastro.CDS_Cadastro.Prior;
-  2: DMCadastro.CDS_Cadastro.Next;
-  3: DMCadastro.CDS_Cadastro.Last;
+  CDSTemp := TClientDataSet.Create(Self);
+  try
+    with DMCadastro, ClasseFilha do
+    begin
+      case Sentido of
+        0: SQL := 'SELECT MIN(' + CampoChave + ') AS CODIGO FROM ' + TabelaPrincipal;
+        1: SQL := 'SELECT MAX(' + CampoChave + ') AS CODIGO FROM ' + TabelaPrincipal
+                    + ' WHERE ' + CampoChave + ' < ' + IntToStr(CodigoAtual);
+        2: SQL := 'SELECT MIN(' + CampoChave + ') AS CODIGO FROM ' + TabelaPrincipal
+                    + ' WHERE ' + CampoChave + ' > ' + IntToStr(CodigoAtual);
+        3: SQL := 'SELECT MAX('+CampoChave+') AS CODIGO FROM '+TabelaPrincipal;
+      end;
+
+      CDSTemp.Data := DMConexao.ExecuteReader(SQL);
+      if not CDSTemp.IsEmpty then
+        AbrirCDS(CDSTemp.FieldByName('CODIGO').AsInteger)
+      else
+        edtCodigo.Text := IntToStr(CodigoAtual);
+    end;
+  finally
+    CDSTemp.Free;
   end;
 end;
 
 procedure TFrmPaiCadastro.pnlTopExit(Sender: TObject);
 begin
   inherited;
-  AbrirCDS(StrToInt(edtCodigo.Text));
+  if edtCodigo.Text <> '' then
+    AbrirCDS(edtCodigo.AsInteger);
 end;
 
 end.

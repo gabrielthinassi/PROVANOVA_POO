@@ -1,7 +1,7 @@
 object SMConexao: TSMConexao
   OldCreateOrder = False
-  Height = 230
-  Width = 317
+  Height = 352
+  Width = 539
   object CON_FB: TSQLConnection
     ConnectionName = 'DataSnapPOO'
     DriverName = 'Firebird'
@@ -49,5 +49,47 @@ object SMConexao: TSMConexao
     Connected = True
     Left = 53
     Top = 36
+  end
+  object SQL_ProximoCodigo: TSQLDataSet
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = CON_FB
+    Left = 88
+    Top = 120
+  end
+  object DSP_ProximoCodigo: TDataSetProvider
+    DataSet = SQL_ProximoCodigo
+    Options = [poAllowCommandText, poUseQuoteChar]
+    UpdateMode = upWhereKeyOnly
+    Left = 88
+    Top = 184
+  end
+  object CDS_ProximoCodigo: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP_ProximoCodigo'
+    Left = 88
+    Top = 256
+  end
+  object SQL_ExecuteReader: TSQLDataSet
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = CON_FB
+    Left = 232
+    Top = 120
+  end
+  object DSP_ExecuteReader: TDataSetProvider
+    DataSet = SQL_ExecuteReader
+    Options = [poReadOnly, poAllowCommandText, poUseQuoteChar]
+    UpdateMode = upWhereKeyOnly
+    Left = 232
+    Top = 184
+  end
+  object CDS_ExecuteReader: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DSP_ProximoCodigo'
+    Left = 232
+    Top = 256
   end
 end
