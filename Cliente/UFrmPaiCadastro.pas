@@ -34,6 +34,8 @@ type
     procedure btnAnteriorClick(Sender: TObject);
     procedure btnProximoClick(Sender: TObject);
     procedure btnUltimoClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     FDMCadastro: TDMPai;
@@ -153,6 +155,19 @@ begin
 
   pnlTop.Enabled := DS.State in [dsBrowse, dsInactive];
 
+end;
+
+procedure TFrmPaiCadastro.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  DS.DataSet.Close;
+  DMCadastro.CodigoAtual := 0;
+end;
+
+procedure TFrmPaiCadastro.FormShow(Sender: TObject);
+begin
+  inherited;
+  edtCodigo.Text := IntToStr(DMCadastro.CodigoAtual);
 end;
 
 procedure TFrmPaiCadastro.NavegarRegistro(Sentido: Integer);

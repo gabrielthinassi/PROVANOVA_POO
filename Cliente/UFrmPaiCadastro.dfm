@@ -2,6 +2,8 @@ inherited FrmPaiCadastro: TFrmPaiCadastro
   Caption = 'FrmPaiCadastro'
   ClientHeight = 400
   ClientWidth = 600
+  OnClose = FormClose
+  OnShow = FormShow
   ExplicitWidth = 616
   ExplicitHeight = 439
   PixelsPerInch = 96
