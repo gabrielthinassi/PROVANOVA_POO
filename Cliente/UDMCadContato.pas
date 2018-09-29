@@ -49,7 +49,7 @@ implementation
 procedure TDMCadContato.CDS_EnderecoBeforeDelete(DataSet: TDataSet);
 begin
   inherited;
-  if not (CDS_Cadastro.State in [dsEdit, dsInsert]) then
+  //if not (CDS_Cadastro.State in [dsEdit, dsInsert]) then
     CDS_Cadastro.Edit;
 end;
 
@@ -69,7 +69,7 @@ end;
 procedure TDMCadContato.CDS_TelefoneBeforeDelete(DataSet: TDataSet);
 begin
   inherited;
-  if not (CDS_Cadastro.State in [dsEdit, dsInsert]) then
+  //if not (CDS_Cadastro.State in [dsEdit, dsInsert]) then
     CDS_Cadastro.Edit;
 end;
 

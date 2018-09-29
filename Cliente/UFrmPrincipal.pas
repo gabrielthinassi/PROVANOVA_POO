@@ -34,25 +34,17 @@ uses
 procedure TFrmPrincipal.mmContatoClick(Sender: TObject);
 begin
   if FrmCadContato = nil then
-  begin
     Application.CreateForm(TFrmCadContato, FrmCadContato);
-    FrmCadContato.ShowModal;
-  end else
-  begin
+  if not FrmCadContato.Showing then
     FrmCadContato.Show;
-  end;
 end;
 
 procedure TFrmPrincipal.mmGridTESTEClick(Sender: TObject);
 begin
   if FrmGridsTESTE = nil then
-  begin
     Application.CreateForm(TFrmGridsTESTE, FrmGridsTESTE);
-    FrmGridsTESTE.ShowModal;
-  end else
-  begin
+  if not FrmGridsTESTE.Showing then
     FrmGridsTESTE.Show;
-  end;
 end;
 
 end.

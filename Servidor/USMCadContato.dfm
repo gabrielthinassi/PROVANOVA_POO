@@ -12,6 +12,21 @@ inherited SMCadContato: TSMCadContato
         Name = 'CODIGO_CONTATO'
         ParamType = ptInput
       end>
+    object SQL_CadastroCODIGO_CONTATO: TIntegerField
+      FieldName = 'CODIGO_CONTATO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object SQL_CadastroNOME_CONTATO: TStringField
+      FieldName = 'NOME_CONTATO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+      Size = 40
+    end
+    object SQL_CadastroDTNASCIMENTO_CONTATO: TDateField
+      FieldName = 'DTNASCIMENTO_CONTATO'
+      ProviderFlags = [pfInUpdate]
+    end
   end
   inherited SQL_Consulta: TSQLDataSet
     Left = 352
@@ -38,6 +53,27 @@ inherited SMCadContato: TSMCadContato
     SQLConnection = SMConexao.CON_FB
     Left = 256
     Top = 48
+    object SQL_EnderecoCODIGO_ENDERECO: TIntegerField
+      FieldName = 'CODIGO_ENDERECO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object SQL_EnderecoRUA_ENDERECO: TStringField
+      FieldName = 'RUA_ENDERECO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+      Size = 30
+    end
+    object SQL_EnderecoNUMERO_ENDERECO: TStringField
+      FieldName = 'NUMERO_ENDERECO'
+      ProviderFlags = [pfInUpdate]
+      Size = 5
+    end
+    object SQL_EnderecoCONTATO_CODCONTATO: TIntegerField
+      FieldName = 'CONTATO_CODCONTATO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
   end
   object SQL_Telefone: TSQLDataSet
     CommandText = 
@@ -56,6 +92,22 @@ inherited SMCadContato: TSMCadContato
     SQLConnection = SMConexao.CON_FB
     Left = 256
     Top = 104
+    object SQL_TelefoneCODIGO_TELEFONE: TIntegerField
+      FieldName = 'CODIGO_TELEFONE'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object SQL_TelefoneNUMERO_TELEFONE: TStringField
+      FieldName = 'NUMERO_TELEFONE'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+      Size = 11
+    end
+    object SQL_TelefoneCONTATO_CODCONTATO: TIntegerField
+      FieldName = 'CONTATO_CODCONTATO'
+      ProviderFlags = [pfInUpdate]
+      Required = True
+    end
   end
   object DSEndereco: TDataSource
     DataSet = SQL_Cadastro
